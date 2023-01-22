@@ -11,11 +11,19 @@ namespace MusicSQLDatabaseApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-           AlbumsDAO albumsDAO = new AlbumsDAO();
+            AlbumsDAO albumsDAO = new AlbumsDAO();
 
-            // connect list to the grid view control
             albumBindingSource.DataSource = albumsDAO.getAllAlbums();
             
+            dataGridView1.DataSource = albumBindingSource;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AlbumsDAO albumsDAO = new AlbumsDAO();
+
+            albumBindingSource.DataSource = albumsDAO.searchTitles(textBox1.Text);
+
             dataGridView1.DataSource = albumBindingSource;
         }
     }
