@@ -39,5 +39,26 @@ namespace MusicSQLDatabaseApp
 
             pictureBox1.Load(imageURL);
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Album album = new Album
+            {
+                albumTitle = textBox2.Text,
+                albumArtist = textBox3.Text,
+                releaseYear = Int32.Parse(textBox4.Text),
+                imageUrl = textBox5.Text,
+                albumGenre = textBox6.Text,
+            };
+
+            AlbumsDAO albumsDAO = new AlbumsDAO();
+            int result = albumsDAO.addOneAlbum(album);
+            MessageBox.Show("Album has been added.");
+        }
     }
 }
