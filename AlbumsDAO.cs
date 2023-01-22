@@ -35,6 +35,8 @@ namespace MusicSQLDatabaseApp
                         imageUrl = reader.GetString(4),
                         albumGenre = reader.GetString(5)
                     };
+                    album.Tracks = getTracksForAlbum(album.id);
+
                     returnAlbums.Add(album);
                 }
             }
@@ -100,6 +102,58 @@ namespace MusicSQLDatabaseApp
 
             return newRows;
 
+        }
+
+        public List<Track> getTracksForAlbum(int albumId)
+        {
+            List<Track> returnTracks = new List<Track>();
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "SELECT * FROM TRACKS WHERE ALBUMS_ID=@albumid";
+            command.Parameters.AddWithValue("@albumid", albumId);
+            command.Connection = connection;
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Track track = new Track
+                    {
+                        trackId = reader.GetInt32(1),
+                        trackTitle = reader.GetString(2),
+                        trackUrl = reader.GetString(3),
+                        trackLyrics = reader.GetString(4),
+                        albumId = reader.GetInt32(5)
+                    };
+                    returnTracks.Add(track);
+                }
+            }
+            connection.Close();
+
+            return returnTracks;
+        }
+
+        internal int deleteTrack(int trackID)
+        {
+            List<Album> returnAlbums = new List<Album>();
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand();
+
+            command.CommandText = "DELETE FROM TRACKS WHERE TRACKS.ID = @trackid;";
+            command.Parameters.AddWithValue("@trackid", trackID);
+
+            command.Connection = connection;
+
+            int result = command.ExecuteNonQuery();
+            connection.Close();
+
+            return result;
         }
     }
 }

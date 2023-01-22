@@ -5,6 +5,9 @@ namespace MusicSQLDatabaseApp
     public partial class Form1 : Form
     {
         BindingSource albumBindingSource = new BindingSource();
+        BindingSource trackBindingSource = new BindingSource();
+
+        List<Album> albums = new List<Album>();
 
         public Form1()
         {
@@ -15,7 +18,9 @@ namespace MusicSQLDatabaseApp
         {
             AlbumsDAO albumsDAO = new AlbumsDAO();
 
-            albumBindingSource.DataSource = albumsDAO.getAllAlbums();
+            albums = albumsDAO.getAllAlbums();
+
+            albumBindingSource.DataSource = albums;
             
             dataGridView1.DataSource = albumBindingSource;
 
@@ -38,6 +43,10 @@ namespace MusicSQLDatabaseApp
             String imageURL = dataGridView.Rows[rowClicked].Cells[4].Value.ToString();
 
             pictureBox1.Load(imageURL);
+
+            trackBindingSource.DataSource = albums[rowClicked].Tracks;
+
+            dataGridView2.DataSource = trackBindingSource;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -59,6 +68,23 @@ namespace MusicSQLDatabaseApp
             AlbumsDAO albumsDAO = new AlbumsDAO();
             int result = albumsDAO.addOneAlbum(album);
             MessageBox.Show("Album has been added.");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridView2.CurrentRow.Index;
+            MessageBox.Show("You have selected row" + rowClicked);
+            int trackID = (int) dataGridView2.Rows[rowClicked].Cells[0].Value;
+            MessageBox.Show("You have selected track" + trackID);
+
+            AlbumsDAO albumsDAO = new AlbumsDAO();
+
+            int result = albumsDAO.deleteTrack(trackID);
+            MessageBox.Show("You have deleted " + result);
+
+            dataGridView2.DataSource = null;
+            albums = albumsDAO.getAllAlbums();
+
         }
     }
 }

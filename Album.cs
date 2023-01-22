@@ -14,5 +14,6 @@ namespace MusicSQLDatabaseApp
         public int releaseYear { get; set; }
         public string imageUrl { get; set; }
         public string albumGenre { get; set; }
+        public List<Track> Tracks { get; set; }
     }
 }
