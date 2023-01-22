@@ -1,6 +1,7 @@
 using MySqlX.XDevAPI.Common;
 using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace MusicSQLDatabaseApp
@@ -40,7 +41,7 @@ namespace MusicSQLDatabaseApp
             dataGridView1.DataSource = albumBindingSource;
         }
 
-        // Grab and display cover art
+        // Grab and display information when navigating Album Database
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dataGridView = (DataGridView)sender;
@@ -48,6 +49,21 @@ namespace MusicSQLDatabaseApp
             int rowClicked = dataGridView.CurrentRow.Index;
             string imageURL = dataGridView.Rows[rowClicked].Cells[4].Value.ToString();
 
+            // Load album text box
+            int albumID = (int)dataGridView1.Rows[rowClicked].Cells[0].Value;
+            string albumTitle = (string)dataGridView1.Rows[rowClicked].Cells[1].Value;
+            string albumArtist = (string)dataGridView1.Rows[rowClicked].Cells[2].Value;
+            int releaseYear = (int)dataGridView1.Rows[rowClicked].Cells[3].Value;
+            string imageUrl = (string)dataGridView1.Rows[rowClicked].Cells[4].Value;
+            string albumGenre = (string)dataGridView1.Rows[rowClicked].Cells[5].Value;
+
+            textBox2.Text = albumTitle.ToString();
+            textBox3.Text = albumArtist.ToString();
+            textBox4.Text = releaseYear.ToString();
+            textBox5.Text = imageUrl.ToString();
+            textBox6.Text = albumGenre.ToString();
+
+            // Load picture
             pictureBox1.Load(imageURL);
 
             trackBindingSource.DataSource = albums[rowClicked].Tracks;
@@ -152,6 +168,47 @@ namespace MusicSQLDatabaseApp
             AlbumsDAO albumsDAO = new AlbumsDAO();
             int result = albumsDAO.addOneTrack(track);
             MessageBox.Show("Track has been added.");
+        }
+
+        // Update album
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridView1.CurrentRow.Index;
+            int albumID = (int)dataGridView1.Rows[rowClicked].Cells[0].Value;
+
+            Album album = new Album
+            {
+                albumTitle = textBox2.Text,
+                albumArtist = textBox3.Text,
+                releaseYear = Int32.Parse(textBox4.Text),
+                imageUrl = textBox5.Text,
+                albumGenre = textBox6.Text,
+            };
+
+            AlbumsDAO albumsDAO = new AlbumsDAO();
+            int result = albumsDAO.updateOneAlbum(album);
+            MessageBox.Show("Album has been updated.");
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+
+            int rowClicked = dataGridView2.CurrentRow.Index;
+            string imageURL = dataGridView2.Rows[rowClicked].Cells[4].Value.ToString();
+
+            // Load album text box
+            int trackId = (int)dataGridView2.Rows[rowClicked].Cells[0].Value;
+            string trackTitle = (string)dataGridView2.Rows[rowClicked].Cells[1].Value;
+            string trackUrl = (string)dataGridView2.Rows[rowClicked].Cells[2].Value;
+            string trackLyrics = (string)dataGridView2.Rows[rowClicked].Cells[3].Value;
+            int albumId = (int)dataGridView2.Rows[rowClicked].Cells[4].Value;
+
+            textBox7.Text = trackId.ToString();
+            textBox8.Text = trackTitle.ToString();
+            textBox9.Text = trackUrl.ToString();
+            textBox10.Text = trackLyrics.ToString();
+            textBox11.Text = albumId.ToString();
         }
     }
 }

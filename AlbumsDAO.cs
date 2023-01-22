@@ -211,5 +211,35 @@ namespace MusicSQLDatabaseApp
 
             return newRows;
         }
+
+        internal int updateOneAlbum(Album album)
+        {
+            List<Album> returnAlbums = new List<Album>();
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = 
+                "UPDATE `albums`" +
+                "SET `ALBUM_TITLE`='@albumtitle'," +
+                "`ALBUM_ARTIST`='@albumartist'," +
+                "`RELEASE_YEAR`='@releaseyear'," +
+                "`IMAGE_URL`='@imageurl'," +
+                "`ALBUM_GENRE`='@albumgenre' " +
+                "WHERE id=@albumid";
+            command.Parameters.AddWithValue("@albumtitle", album.albumTitle);
+            command.Parameters.AddWithValue("@albumartist", album.albumArtist);
+            command.Parameters.AddWithValue("@releaseyear", album.releaseYear);
+            command.Parameters.AddWithValue("@imageurl", album.imageUrl);
+            command.Parameters.AddWithValue("@albumgenre", album.albumGenre);
+            command.Parameters.AddWithValue("@albumid", album.id);
+            command.Connection = connection;
+
+            int newRows = command.ExecuteNonQuery();
+            connection.Close();
+
+            return newRows;
+        }
     }
 }
