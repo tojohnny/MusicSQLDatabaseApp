@@ -52,17 +52,17 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -305,6 +305,69 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Add New Track";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(221, 167);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(105, 23);
+            this.button6.TabIndex = 13;
+            this.button6.Text = "Add Track";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(21, 141);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(57, 15);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Album ID";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(16, 112);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 15);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "Track Lyrics";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(20, 83);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(58, 15);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Track URL";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(20, 54);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 15);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Track Title";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 25);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 15);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Track #";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(86, 138);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(240, 23);
+            this.textBox11.TabIndex = 4;
+            // 
             // textBox10
             // 
             this.textBox10.Location = new System.Drawing.Point(86, 109);
@@ -332,68 +395,6 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(240, 23);
             this.textBox7.TabIndex = 0;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(221, 167);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(105, 23);
-            this.button6.TabIndex = 13;
-            this.button6.Text = "Add Track";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(86, 138);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(240, 23);
-            this.textBox11.TabIndex = 4;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(27, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 15);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Track #";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 54);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 15);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Track Title";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(20, 83);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(58, 15);
-            this.label11.TabIndex = 7;
-            this.label11.Text = "Track URL";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 112);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 15);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "Track Lyrics";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(21, 141);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 15);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "Album ID";
             // 
             // Form1
             // 

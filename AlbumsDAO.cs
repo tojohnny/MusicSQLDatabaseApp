@@ -188,5 +188,28 @@ namespace MusicSQLDatabaseApp
 
             return result;
         }
+
+        internal int addOneTrack(Track track)
+        {
+            List<Track> returnTracks = new List<Track>();
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "INSERT INTO `tracks`(`TRACK_ID`, `TRACK_TITLE`, `TRACK_URL`, `TRACK_LYRICS`, `albums_ID`)" +
+                " VALUES (@trackid, @tracktitle, @trackurl, @tracklyrics, @albumid)";
+            command.Parameters.AddWithValue("@trackid", track.trackId);
+            command.Parameters.AddWithValue("@tracktitle", track.trackTitle);
+            command.Parameters.AddWithValue("@trackurl", track.trackUrl);
+            command.Parameters.AddWithValue("@tracklyrics", track.trackLyrics);
+            command.Parameters.AddWithValue("@albumid", track.albumId);
+            command.Connection = connection;
+
+            int newRows = command.ExecuteNonQuery();
+            connection.Close();
+
+            return newRows;
+        }
     }
 }

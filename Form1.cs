@@ -17,6 +17,7 @@ namespace MusicSQLDatabaseApp
             InitializeComponent();
         }
 
+        // Load albums
         private void button1_Click(object sender, EventArgs e)
         {
             AlbumsDAO albumsDAO = new AlbumsDAO();
@@ -29,6 +30,7 @@ namespace MusicSQLDatabaseApp
 
         }
 
+        // Search titles
         private void button2_Click(object sender, EventArgs e)
         {
             AlbumsDAO albumsDAO = new AlbumsDAO();
@@ -38,12 +40,13 @@ namespace MusicSQLDatabaseApp
             dataGridView1.DataSource = albumBindingSource;
         }
 
+        // Grab and display cover art
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dataGridView = (DataGridView)sender;
 
             int rowClicked = dataGridView.CurrentRow.Index;
-            String imageURL = dataGridView.Rows[rowClicked].Cells[4].Value.ToString();
+            string imageURL = dataGridView.Rows[rowClicked].Cells[4].Value.ToString();
 
             pictureBox1.Load(imageURL);
 
@@ -54,9 +57,10 @@ namespace MusicSQLDatabaseApp
 
         private void label1_Click(object sender, EventArgs e)
         {
-            //do nothing
+            // delete later
         }
 
+        // Add new album.
         private void button3_Click(object sender, EventArgs e)
         {
             Album album = new Album
@@ -73,6 +77,7 @@ namespace MusicSQLDatabaseApp
             MessageBox.Show("Album has been added.");
         }
 
+        // Delete track
         private void button4_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridView2.CurrentRow.Index;
@@ -99,11 +104,13 @@ namespace MusicSQLDatabaseApp
             }
         }
 
+        // Empty label
         private void label9_Click(object sender, EventArgs e)
         {
-
+            // delete later
         }
 
+        // Delete album
         private void button5_Click(object sender, EventArgs e)
         {
             int rowClicked = dataGridView1.CurrentRow.Index;
@@ -128,6 +135,23 @@ namespace MusicSQLDatabaseApp
             {
                 MessageBox.Show("You have canceled deletion of album " + albumID + ".");
             }
+        }
+
+        // Add new track
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Track track = new Track
+            {
+                trackId = Int32.Parse(textBox7.Text),
+                trackTitle = textBox8.Text,
+                trackUrl = textBox9.Text,
+                trackLyrics = textBox10.Text,
+                albumId = Int32.Parse(textBox11.Text),
+            };
+
+            AlbumsDAO albumsDAO = new AlbumsDAO();
+            int result = albumsDAO.addOneTrack(track);
+            MessageBox.Show("Track has been added.");
         }
     }
 }
