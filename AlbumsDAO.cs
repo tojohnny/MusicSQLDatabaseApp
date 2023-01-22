@@ -1,9 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace MusicSQLDatabaseApp
 {
@@ -152,6 +154,37 @@ namespace MusicSQLDatabaseApp
 
             int result = command.ExecuteNonQuery();
             connection.Close();
+
+            return result;
+        }
+
+        internal int deleteAlbum(int albumID)
+        {
+            int result = 0;
+            try
+            {
+                List<Album> returnAlbums = new List<Album>();
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand();
+
+                command.CommandText = "DELETE FROM ALBUMS WHERE ID = @albumid;";
+                command.Parameters.AddWithValue("@albumid", albumID);
+
+                command.Connection = connection;
+
+                result = command.ExecuteNonQuery();
+                connection.Close();
+
+                return result;
+
+            } 
+            catch (Exception ForeignKeyConstraint) 
+            {
+                MessageBox.Show("Album is not empty, deletion canceled.");
+            }
 
             return result;
         }
