@@ -47,28 +47,38 @@ namespace MusicSQLDatabaseApp
             DataGridView dataGridView = (DataGridView)sender;
 
             int rowClicked = dataGridView.CurrentRow.Index;
-            string imageURL = dataGridView.Rows[rowClicked].Cells[4].Value.ToString();
+            var valueRetrieved = dataGridView.Rows[rowClicked].Cells[4].Value;
+            string imageURL = null;
 
-            // Load album text box
-            int albumID = (int)dataGridView1.Rows[rowClicked].Cells[0].Value;
-            string albumTitle = (string)dataGridView1.Rows[rowClicked].Cells[1].Value;
-            string albumArtist = (string)dataGridView1.Rows[rowClicked].Cells[2].Value;
-            int releaseYear = (int)dataGridView1.Rows[rowClicked].Cells[3].Value;
-            string imageUrl = (string)dataGridView1.Rows[rowClicked].Cells[4].Value;
-            string albumGenre = (string)dataGridView1.Rows[rowClicked].Cells[5].Value;
+            if (valueRetrieved != null)
+            {
+                imageURL = valueRetrieved.ToString();
 
-            textBox2.Text = albumTitle.ToString();
-            textBox3.Text = albumArtist.ToString();
-            textBox4.Text = releaseYear.ToString();
-            textBox5.Text = imageUrl.ToString();
-            textBox6.Text = albumGenre.ToString();
+                // Load album text box
+                int albumID = (int)dataGridView1.Rows[rowClicked].Cells[0].Value;
+                string albumTitle = (string)dataGridView1.Rows[rowClicked].Cells[1].Value;
+                string albumArtist = (string)dataGridView1.Rows[rowClicked].Cells[2].Value;
+                int releaseYear = (int)dataGridView1.Rows[rowClicked].Cells[3].Value;
+                string imageUrl = (string)dataGridView1.Rows[rowClicked].Cells[4].Value;
+                string albumGenre = (string)dataGridView1.Rows[rowClicked].Cells[5].Value;
 
-            // Load picture
-            pictureBox1.Load(imageURL);
+                textBox2.Text = albumTitle.ToString();
+                textBox3.Text = albumArtist.ToString();
+                textBox4.Text = releaseYear.ToString();
+                textBox5.Text = imageUrl.ToString();
+                textBox6.Text = albumGenre.ToString();
 
-            trackBindingSource.DataSource = albums[rowClicked].Tracks;
+                // Load picture
+                pictureBox1.Load(imageURL);
 
-            dataGridView2.DataSource = trackBindingSource;
+                trackBindingSource.DataSource = albums[rowClicked].Tracks;
+
+                dataGridView2.DataSource = trackBindingSource;
+            }
+            else
+            {
+                MessageBox.Show("This album does not exist, try another album.");
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
