@@ -2,6 +2,7 @@
 {
     internal class Track
     {
+        public int id { get; set; }
         public int trackId { get; set; }
         public string trackTitle { get; set; }
         public string trackUrl { get; set; }

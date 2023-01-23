@@ -124,6 +124,7 @@ namespace MusicSQLDatabaseApp
                 {
                     Track track = new Track
                     {
+                        id = reader.GetInt32(0),
                         trackId = reader.GetInt32(1),
                         trackTitle = reader.GetString(2),
                         trackUrl = reader.GetString(3),
@@ -220,20 +221,38 @@ namespace MusicSQLDatabaseApp
             connection.Open();
 
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = 
-                "UPDATE `albums`" +
-                "SET `ALBUM_TITLE`='@albumtitle'," +
-                "`ALBUM_ARTIST`='@albumartist'," +
-                "`RELEASE_YEAR`='@releaseyear'," +
-                "`IMAGE_URL`='@imageurl'," +
-                "`ALBUM_GENRE`='@albumgenre' " +
-                "WHERE id=@albumid";
+            command.CommandText = "UPDATE albums SET ALBUM_TITLE = @albumtitle, ALBUM_ARTIST = @albumartist," +
+                "RELEASE_YEAR = @releaseyear, IMAGE_URL = @imageurl, ALBUM_GENRE = @albumgenre WHERE ID = @albumid";
             command.Parameters.AddWithValue("@albumtitle", album.albumTitle);
             command.Parameters.AddWithValue("@albumartist", album.albumArtist);
             command.Parameters.AddWithValue("@releaseyear", album.releaseYear);
             command.Parameters.AddWithValue("@imageurl", album.imageUrl);
             command.Parameters.AddWithValue("@albumgenre", album.albumGenre);
             command.Parameters.AddWithValue("@albumid", album.id);
+            command.Connection = connection;
+
+            int newRows = command.ExecuteNonQuery();
+            connection.Close();
+
+            return newRows;
+        }
+
+        internal int updateOneTrack(Track track)
+        {
+            List<Track> returnTrack = new List<Track>();
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText = "UPDATE tracks SET TRACK_ID = @trackid, TRACK_TITLE = @tracktitle," +
+                "TRACK_URL = @trackurl, TRACK_LYRICS = @tracklyrics, ALBUMS_ID = @albumsid WHERE ID = @id";
+            command.Parameters.AddWithValue("@trackid", track.trackId);
+            command.Parameters.AddWithValue("@tracktitle", track.trackTitle);
+            command.Parameters.AddWithValue("@trackurl", track.trackUrl);
+            command.Parameters.AddWithValue("@tracklyrics", track.trackLyrics);
+            command.Parameters.AddWithValue("@albumsid", track.albumId);
+            command.Parameters.AddWithValue("@id", track.id);
             command.Connection = connection;
 
             int newRows = command.ExecuteNonQuery();

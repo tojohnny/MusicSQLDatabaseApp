@@ -183,6 +183,7 @@ namespace MusicSQLDatabaseApp
                 releaseYear = Int32.Parse(textBox4.Text),
                 imageUrl = textBox5.Text,
                 albumGenre = textBox6.Text,
+                id = albumID,
             };
 
             AlbumsDAO albumsDAO = new AlbumsDAO();
@@ -190,6 +191,7 @@ namespace MusicSQLDatabaseApp
             MessageBox.Show("Album has been updated.");
         }
 
+        // Grab and display information when navigating track database
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dataGridView = (DataGridView)sender;
@@ -198,17 +200,38 @@ namespace MusicSQLDatabaseApp
             string imageURL = dataGridView2.Rows[rowClicked].Cells[4].Value.ToString();
 
             // Load album text box
-            int trackId = (int)dataGridView2.Rows[rowClicked].Cells[0].Value;
-            string trackTitle = (string)dataGridView2.Rows[rowClicked].Cells[1].Value;
-            string trackUrl = (string)dataGridView2.Rows[rowClicked].Cells[2].Value;
-            string trackLyrics = (string)dataGridView2.Rows[rowClicked].Cells[3].Value;
-            int albumId = (int)dataGridView2.Rows[rowClicked].Cells[4].Value;
+            int trackId = (int)dataGridView2.Rows[rowClicked].Cells[1].Value;
+            string trackTitle = (string)dataGridView2.Rows[rowClicked].Cells[2].Value;
+            string trackUrl = (string)dataGridView2.Rows[rowClicked].Cells[3].Value;
+            string trackLyrics = (string)dataGridView2.Rows[rowClicked].Cells[4].Value;
+            int albumId = (int)dataGridView2.Rows[rowClicked].Cells[5].Value;
 
             textBox7.Text = trackId.ToString();
             textBox8.Text = trackTitle.ToString();
             textBox9.Text = trackUrl.ToString();
             textBox10.Text = trackLyrics.ToString();
             textBox11.Text = albumId.ToString();
+        }
+
+        // Update tracks
+        private void button8_Click(object sender, EventArgs e)
+        {
+            int rowClicked = dataGridView2.CurrentRow.Index;
+            int trackID = (int)dataGridView2.Rows[rowClicked].Cells[0].Value;
+
+            Track track = new Track
+            {
+                trackId = Int32.Parse(textBox7.Text),
+                trackTitle = textBox8.Text,
+                trackUrl = textBox9.Text,
+                trackLyrics = textBox10.Text,
+                albumId = Int32.Parse(textBox11.Text),
+                id = trackID,
+            };
+
+            AlbumsDAO albumsDAO = new AlbumsDAO();
+            int result = albumsDAO.updateOneTrack(track);
+            MessageBox.Show("Track has been updated.");
         }
     }
 }
