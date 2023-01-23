@@ -28,6 +28,12 @@ namespace MusicSQLDatabaseApp
             albumBindingSource.DataSource = albums;
             
             dataGridView1.DataSource = albumBindingSource;
+            dataGridView1.Columns[0].HeaderText = "Album ID";
+            dataGridView1.Columns[1].HeaderText = "Album Title";
+            dataGridView1.Columns[2].HeaderText = "Album Artist";
+            dataGridView1.Columns[3].HeaderText = "Release Year";
+            dataGridView1.Columns[4].HeaderText = "Cover Art Image URL";
+            dataGridView1.Columns[5].HeaderText = "Genre";
 
         }
 
@@ -79,6 +85,13 @@ namespace MusicSQLDatabaseApp
             {
                 MessageBox.Show("This album does not exist, try another album.");
             }
+
+            dataGridView2.Columns[0].HeaderText = "Track ID";
+            dataGridView2.Columns[1].HeaderText = "Track #";
+            dataGridView2.Columns[2].HeaderText = "Track Title";
+            dataGridView2.Columns[3].HeaderText = "YouTube URL";
+            dataGridView2.Columns[4].HeaderText = "Track Lyrics";
+            dataGridView2.Columns[5].HeaderText = "Album ID";
         }
 
         private void label1_Click(object sender, EventArgs e)
