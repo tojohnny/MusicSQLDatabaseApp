@@ -86,12 +86,12 @@ namespace MusicSQLDatabaseApp
                 MessageBox.Show("This album does not exist, try another album.");
             }
 
-            dataGridView2.Columns[0].HeaderText = "Track ID";
-            dataGridView2.Columns[1].HeaderText = "Track #";
-            dataGridView2.Columns[2].HeaderText = "Track Title";
-            dataGridView2.Columns[3].HeaderText = "YouTube URL";
-            dataGridView2.Columns[4].HeaderText = "Track Lyrics";
-            dataGridView2.Columns[5].HeaderText = "Album ID";
+            //dataGridView2.Columns[0].HeaderText = "Track ID";
+            dataGridView2.Columns[0].HeaderText = "Track #";
+            dataGridView2.Columns[1].HeaderText = "Track Title";
+            dataGridView2.Columns[2].HeaderText = "YouTube URL";
+            dataGridView2.Columns[3].HeaderText = "Track Lyrics";
+            dataGridView2.Columns[4].HeaderText = "Album ID";
         }
 
         private void label1_Click(object sender, EventArgs e)
