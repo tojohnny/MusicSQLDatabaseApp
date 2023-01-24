@@ -2,7 +2,8 @@
 Basic CRUD app that works with a local MySQL Database.
 
 # GUI
-![V1.0.0](https://github.com/tojohnny/MusicSQLDatabaseApp/blob/master/GUIsample.png?raw=true)
+![Albums](https://github.com/tojohnny/MusicSQLDatabaseApp/blob/master/GUIsample2.png?raw=true)
+![Tracks](https://github.com/tojohnny/MusicSQLDatabaseApp/blob/master/GUIsample3.png?raw=true)
 
 # Features
 - Add/Update/Delete albums.
